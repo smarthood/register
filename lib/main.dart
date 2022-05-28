@@ -48,6 +48,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  bool _validate = false;
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +56,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         padding: const EdgeInsets.all(10),
         child: ListView(
           children: <Widget>[
+            //parenticno_input
             Container(
-              padding: const EdgeInsets.fromLTRB(10, 100, 10, 10),
+              margin: const EdgeInsets.only(top: 80, left: 10, right: 10),
               child: TextField(
                 controller: parenticnoController,
                 decoration: InputDecoration(
@@ -75,11 +77,20 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   ),
                 ),
               ),
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromARGB(76, 0, 0, 0),
+                    blurRadius: 10,
+                    offset: const Offset(0, 10),
+                  ),
+                ],
+              ),
             ),
+            //name_input
             Container(
-              padding: const EdgeInsets.fromLTRB(10, 50, 10, 10),
+              margin: const EdgeInsets.only(top: 80, left: 10, right: 10),
               child: TextField(
-                obscureText: true,
                 controller: nameController,
                 decoration: InputDecoration(
                   fillColor: Colors.white,
@@ -97,14 +108,25 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   ),
                 ),
               ),
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromARGB(76, 0, 0, 0),
+                    blurRadius: 10,
+                    offset: const Offset(0, 10),
+                  ),
+                ],
+              ),
             ),
+            //email_input
             Container(
-              padding: const EdgeInsets.fromLTRB(10, 50, 10, 10),
+              margin: const EdgeInsets.only(top: 80, left: 10, right: 10),
               child: TextField(
                 controller: emailController,
                 decoration: InputDecoration(
                   fillColor: Colors.white,
                   filled: true,
+                  errorText: _validate ? 'Value Can\'t Be Empty' : null,
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
                       color: const Color(0xff043E6C),
@@ -118,10 +140,21 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   ),
                 ),
               ),
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromARGB(76, 0, 0, 0),
+                    blurRadius: 10,
+                    offset: const Offset(0, 10),
+                  ),
+                ],
+              ),
             ),
+            //password_input
             Container(
-              padding: const EdgeInsets.fromLTRB(10, 50, 10, 10),
+              margin: const EdgeInsets.only(top: 80, left: 10, right: 10),
               child: TextField(
+                obscureText: true,
                 controller: passwordController,
                 decoration: InputDecoration(
                   fillColor: Colors.white,
@@ -138,6 +171,15 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     color: Color.fromARGB(221, 4, 61, 108),
                   ),
                 ),
+              ),
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromARGB(76, 0, 0, 0),
+                    blurRadius: 10,
+                    offset: const Offset(0, 10),
+                  ),
+                ],
               ),
             ),
             Container(
@@ -157,7 +199,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   child: const Text('Register'),
                   onPressed: () {
                     print(nameController.text);
+                    print(emailController.text);
+                    print(parenticnoController.text);
                     print(passwordController.text);
+                    setState(() {
+                      emailController.text.isEmpty
+                          ? _validate = true
+                          : _validate = false;
+                    });
                   },
                 )),
           ],
